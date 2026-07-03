@@ -1,75 +1,135 @@
-# React + TypeScript + Vite
+# ShopSense Playwright E2E Automation Framework
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Playwright E2E Tests](https://github.com/vivek77777/shopsense-playwright-framework/actions/workflows/playwright.yml/badge.svg)](https://github.com/vivek77777/shopsense-playwright-framework/actions/workflows/playwright.yml)
 
-Currently, two official plugins are available:
+ShopSense is a React + TypeScript sample e-commerce application with a production-style Playwright end-to-end automation framework.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The goal of this project is to demonstrate how to build and maintain a scalable test automation framework using Playwright, TypeScript, Page Object Model, reusable fixtures, test data management, smoke/regression suites, HTML reporting, and GitHub Actions CI/CD.
 
-## React Compiler
+This project was built to mirror real QA automation responsibilities such as validating critical user flows, reducing test duplication, improving test maintainability, and making test results easy to understand in CI.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Application
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- CSS
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Test Automation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Playwright
+- TypeScript
+- Page Object Model
+- Custom Playwright fixtures
+- Test data fixtures
+- Smoke and regression test tags
+- HTML reports
+- JUnit test results
+- GitHub Actions CI/CD
 
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Application Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The sample application includes:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- User login
+- Invalid login validation
+- Product catalog
+- Product search
+- Add to cart
+- Increase item quantity
+- Decrease item quantity
+- Remove item from cart
+- Empty cart state
+- Cart total calculation
+- Checkout form
+- Required field validation
+- Invalid email validation
+- Invalid postal code validation
+- Order confirmation
 
-```
+---
+
+## Test Coverage
+
+The Playwright test suite covers the following areas:
+
+### Authentication
+
+- Valid user can log in successfully
+- Invalid user sees login error
+
+### Cart
+
+- User can search and add product to cart
+- Search with no matching product shows empty result message
+- Empty cart shows empty state
+- Checkout is unavailable when cart is empty
+- User can increase and decrease item quantity
+- User can remove item from cart
+- Cart total updates after adding multiple products
+- Out-of-stock product cannot be added to cart
+
+### Checkout
+
+- Checkout page shows selected cart count
+- Empty checkout form shows required field errors
+- Invalid checkout email shows validation error
+- Invalid postal code shows validation error
+- User can place order with valid checkout details
+
+---
+
+## Framework Architecture
+
+```text
+shopsense-playwright-framework
+│
+├── .github
+│   └── workflows
+│       └── playwright.yml
+│
+├── src
+│   ├── components
+│   │   └── ProductCard.tsx
+│   │
+│   ├── data
+│   │   └── products.ts
+│   │
+│   ├── pages
+│   │   ├── CheckoutPage.tsx
+│   │   ├── LoginPage.tsx
+│   │   └── ProductsPage.tsx
+│   │
+│   ├── types
+│   │   ├── CartItem.ts
+│   │   └── Product.ts
+│   │
+│   ├── App.tsx
+│   └── App.css
+│
+├── tests
+│   ├── e2e
+│   │   ├── auth.spec.ts
+│   │   ├── cart.spec.ts
+│   │   └── checkout.spec.ts
+│   │
+│   ├── fixtures
+│   │   ├── checkoutData.ts
+│   │   ├── products.ts
+│   │   ├── test.ts
+│   │   └── users.ts
+│   │
+│   └── pages
+│       ├── CheckoutPage.ts
+│       ├── LoginPage.ts
+│       └── ProductsPage.ts
+│
+├── playwright.config.ts
+├── package.json
+└── README.md
